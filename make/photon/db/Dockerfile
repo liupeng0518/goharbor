@@ -2,16 +2,18 @@ FROM ppc64le/fedora:26
 
 ENV PGDATA /var/lib/postgresql/data
 
-RUN dnf install -y gzip postgresql postgresql-server
-RUN mkdir -p /docker-entrypoint-initdb.d 
-RUN mkdir -p /run/postgresql 
-RUN  chown -R postgres:postgres /run/postgresql 
-RUN  chmod 2777 /run/postgresql 
-RUN  mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PGDATA" 
-RUN  sed -i "s|#listen_addresses = 'localhost'.*|listen_addresses = '*'|g" /usr/share/pgsql/postgresql.conf.sample 
-RUN  sed -i "s|#unix_socket_directories = '/tmp'.*|unix_socket_directories = '/run/postgresql'|g" /usr/share/pgsql/postgresql.conf.sample 
+RUN set -x \ 
+    && dnf install -y gzip postgresql postgresql-server >> /dev/null\
+    && mkdir -p /docker-entrypoint-initdb.d \
+    && mkdir -p /run/postgresql \
+    && chown -R postgres:postgres /run/postgresql \
+    && chmod 2777 /run/postgresql \
+    && mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PGDATA" \
+    && sed -i "s|#listen_addresses = 'localhost'.*|listen_addresses = '*'|g" /usr/share/pgsql/postgresql.conf.sample \
+    && sed -i "s|#unix_socket_directories = '/tmp'.*|unix_socket_directories = '/run/postgresql'|g" /usr/share/pgsql/postgresql.conf.sample \
+    && dnf clean all
 
-RUN yum erase -y toybox && yum install -y util-linux net-tools
+RUN dnf install -y util-linux net-tools
 
 VOLUME /var/lib/postgresql/data
 
