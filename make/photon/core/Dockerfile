@@ -1,4 +1,4 @@
-FROM ppc64le/fedora:26
+FROM ppc64le/fedora:29
 
 RUN yum install sudo tzdata -y >> /dev/null \
     && yum clean all \

@@ -1,4 +1,4 @@
-FROM ppc64le/fedora:26
+FROM ppc64le/fedora:29
 
 RUN yum install -y git sudo rpm xz python-xml >>/dev/null\
     && yum clean all \

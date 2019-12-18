@@ -23,7 +23,7 @@ RUN ls -la \
     && npm run release
 
 
-FROM ppc64le/fedora:26
+FROM ppc64le/fedora:29
 
 COPY --from=nodeportal /build_dir/dist /usr/share/nginx/html
 COPY --from=nodeportal /build_dir/swagger.yaml /usr/share/nginx/html

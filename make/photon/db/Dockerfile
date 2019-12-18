@@ -1,9 +1,10 @@
-FROM ppc64le/fedora:26
+FROM ppc64le/fedora:29
 
 ENV PGDATA /var/lib/postgresql/data
 
 RUN set -x \ 
     && dnf clean all \
+    && dnf update \
     && yum install -y gzip postgresql postgresql-server >> /dev/null\
     && mkdir -p /docker-entrypoint-initdb.d \
     && mkdir -p /run/postgresql \

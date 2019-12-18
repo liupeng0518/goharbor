@@ -1,4 +1,4 @@
-FROM ppc64le/fedora:26
+FROM ppc64le/fedora:29
 
 RUN yum install -y  sudo >>/dev/null\
     && yum clean all \
