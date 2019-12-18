@@ -11,7 +11,7 @@ services:
 
 script:
 #   - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-  -  make pushimage -e DEVFLAG=false
+  -  make build -e DEVFLAG=false
   - docker images|grep harbor
 
 
