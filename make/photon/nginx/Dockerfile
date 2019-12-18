@@ -2,9 +2,9 @@ FROM ppc64le/fedora:29
 
 RUN rm -rf /etc/yum.repos.d/* \
     && curl -o /etc/yum.repos.d/fedora.repo https://raw.githubusercontent.com/liupeng0518/goharbor/master/fedora.repo \
+    && groupadd -r -g 10000 nginx && useradd --no-log-init -r -g 10000 -u 10000 nginx \
     && yum install sudo nginx -y >> /dev/null\
     && yum clean all \
-    && groupadd -r -g 10000 nginx && useradd --no-log-init -r -g 10000 -u 10000 nginx \
     && ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
