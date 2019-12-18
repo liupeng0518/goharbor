@@ -8,6 +8,7 @@ RUN mkdir -p /harbor_make
 
 RUN set -x \
     && dnf clean all \
+    && dnf update \
     && yum install -y python3 python3-pip which
 RUN pip3 install pipenv==2018.11.26
 
