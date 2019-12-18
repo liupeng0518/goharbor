@@ -14,7 +14,7 @@ RUN rm -rf /etc/yum.repos.d/* \
 RUN pip3 install pipenv==2018.11.26
 
 COPY make/photon/prepare /usr/src/app
-RUN set -ex && pipenv lock && pipenv install --deploy --system
+RUN set -ex && pipenv install --deploy --system
 
 ENTRYPOINT [ "python3", "main.py" ]
 
