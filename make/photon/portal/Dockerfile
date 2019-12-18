@@ -32,7 +32,9 @@ COPY --from=nodeportal /build_dir/LICENSE /usr/share/nginx/html
 
 COPY make/photon/portal/nginx.conf /etc/nginx/nginx.conf
 
-RUN yum install -y nginx sudo >> /dev/null \
+RUN rm -rf /etc/yum.repos.d/* \
+    && curl -o /etc/yum.repos.d/fedora.repo https://raw.githubusercontent.com/liupeng0518/goharbor/master/fedora.repo \
+    && yum install -y nginx sudo >> /dev/null \
     && ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log \
     && groupadd -r -g 10000 nginx && useradd --no-log-init -r -g 10000 -u 10000 nginx \

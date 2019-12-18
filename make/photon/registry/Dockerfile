@@ -3,8 +3,8 @@ FROM ppc64le/fedora:29
 MAINTAINER wangyan@vmware.com
 
 # The original script in the docker offical registry image.
-RUN set -x \
-    && dnf clean all \
+RUN rm -rf /etc/yum.repos.d/* \
+    && curl -o /etc/yum.repos.d/fedora.repo https://raw.githubusercontent.com/liupeng0518/goharbor/master/fedora.repo \
     && yum install sudo -y \
     && yum clean all \
     && mkdir /harbor/ \

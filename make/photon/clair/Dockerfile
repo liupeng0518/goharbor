@@ -1,6 +1,8 @@
 FROM ppc64le/fedora:29
 
-RUN yum install -y git sudo rpm xz python-xml >>/dev/null\
+RUN rm -rf /etc/yum.repos.d/* \
+    && curl -o /etc/yum.repos.d/fedora.repo https://raw.githubusercontent.com/liupeng0518/goharbor/master/fedora.repo \
+    && yum install -y git sudo rpm xz python-xml >>/dev/null\
     && yum clean all \
     && mkdir /clair/ \
     && mkdir /harbor \

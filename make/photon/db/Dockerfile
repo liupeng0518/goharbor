@@ -1,10 +1,8 @@
 FROM ppc64le/fedora:29
 
 ENV PGDATA /var/lib/postgresql/data
-
-RUN set -x \ 
-    && dnf clean all \
-    && dnf update \
+RUN rm -rf /etc/yum.repos.d/* \
+    && curl -o /etc/yum.repos.d/fedora.repo https://raw.githubusercontent.com/liupeng0518/goharbor/master/fedora.repo \
     && yum install -y gzip postgresql postgresql-server >> /dev/null\
     && mkdir -p /docker-entrypoint-initdb.d \
     && mkdir -p /run/postgresql \

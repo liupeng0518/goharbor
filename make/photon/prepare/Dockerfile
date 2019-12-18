@@ -6,10 +6,11 @@ WORKDIR /usr/src/app
 
 RUN mkdir -p /harbor_make
 
-RUN set -x \
-    && dnf clean all \
-    && dnf update \
-    && yum install -y python3 python3-pip which
+RUN rm -rf /etc/yum.repos.d/* \
+    && curl -o /etc/yum.repos.d/fedora.repo https://raw.githubusercontent.com/liupeng0518/goharbor/master/fedora.repo \
+    && yum install -y python3 python3-pip which \
+    && dnf clean all
+
 RUN pip3 install pipenv==2018.11.26
 
 COPY make/photon/prepare /usr/src/app
