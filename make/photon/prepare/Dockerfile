@@ -7,7 +7,9 @@ WORKDIR /usr/src/app
 RUN mkdir -p /harbor_make
 
 RUN set -x \
-    && yum install -y python3 python3-pip which
+    && yum makecache \
+    && yum install -y python3 python3-pip which \
+    && yum clean all
 RUN pip3 install pipenv==2018.11.26
 
 COPY make/photon/prepare /usr/src/app
