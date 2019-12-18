@@ -3,6 +3,7 @@ FROM ppc64le/fedora:26
 ENV PGDATA /var/lib/postgresql/data
 
 RUN set -x \ 
+    && dnf clean all \
     && yum install -y gzip postgresql postgresql-server >> /dev/null\
     && mkdir -p /docker-entrypoint-initdb.d \
     && mkdir -p /run/postgresql \
@@ -13,7 +14,8 @@ RUN set -x \
     && sed -i "s|#unix_socket_directories = '/tmp'.*|unix_socket_directories = '/run/postgresql'|g" /usr/share/pgsql/postgresql.conf.sample \
     && yum clean all
 
-RUN yum install -y util-linux net-tools
+RUN dnf clean all \
+    && yum install -y util-linux net-tools
 
 VOLUME /var/lib/postgresql/data
 

@@ -1,6 +1,8 @@
 FROM ppc64le/fedora:26
 
-RUN yum install -y redis sudo 
+RUN set -x \
+    && dnf clean all \
+    && yum install -y redis sudo 
 
 VOLUME /var/lib/redis
 WORKDIR /var/lib/redis

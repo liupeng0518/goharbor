@@ -1,6 +1,8 @@
 FROM ppc64le/fedora:26
 
-RUN yum install -y cronie rsyslog logrotate tar gzip sudo >> /dev/null\
+RUN set -x \
+    && dnf clean all \
+    && yum install -y cronie rsyslog logrotate tar gzip sudo \
     && mkdir /var/spool/rsyslog \
     && groupadd -r -g 10000 syslog && useradd --no-log-init -r -g 10000 -u 10000 syslog \
     && yum clean all

@@ -2,7 +2,9 @@ FROM ppc64le/fedora:26
 
 MAINTAINER wangyan@vmware.com
 
-RUN yum install sudo -y >> /dev/null \
+RUN set -x \
+    && dnf clean all \
+    && yum install sudo -y >> /dev/null \
     && yum clean all \
     && groupadd -r -g 10000 harbor && useradd --no-log-init -r -g 10000 -u 10000 harbor \
     && mkdir -p /etc/registry \

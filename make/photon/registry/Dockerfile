@@ -3,7 +3,9 @@ FROM ppc64le/fedora:26
 MAINTAINER wangyan@vmware.com
 
 # The original script in the docker offical registry image.
-RUN yum install sudo -y >> /dev/null\
+RUN set -x \
+    && dnf clean all \
+    && yum install sudo -y \
     && yum clean all \
     && mkdir /harbor/ \
     && mkdir -p /etc/registry \
